@@ -54,7 +54,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/opengraph-image"],
+    images: [
+      {
+        url: "/twitter-image",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — ${site.offerLine}`,
+      },
+    ],
   },
   formatDetection: {
     telephone: true,

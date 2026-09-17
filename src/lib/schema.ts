@@ -6,9 +6,7 @@ export function jsonLdGraph() {
   const imageUrl = `${site.url}/images/workshop-strand-groep.jpg`;
   const postalAddress = {
     "@type": "PostalAddress",
-    name: "Kantoor",
-    streetAddress: site.address.streetAddress,
-    postalCode: site.address.postalCode,
+    name: "Kantoor, geen winkel- of bezoekadres",
     addressLocality: site.address.addressLocality,
     addressRegion: site.address.addressRegion,
     addressCountry: site.address.addressCountry,
