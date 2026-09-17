@@ -2,7 +2,13 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { MobileCta } from "@/components/mobile-cta";
 
-export function SiteShell({ children }: { children: React.ReactNode }) {
+export function SiteShell({
+  children,
+  hideMobileCta = false,
+}: {
+  children: React.ReactNode;
+  hideMobileCta?: boolean;
+}) {
   return (
     <>
       <a
@@ -12,11 +18,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         Ga naar inhoud
       </a>
       <Header />
-      <main id="inhoud" className="pb-24 xl:pb-0">
+      <main id="inhoud" className={hideMobileCta ? undefined : "pb-24 xl:pb-0"}>
         {children}
       </main>
       <Footer />
-      <MobileCta />
+      {hideMobileCta ? null : <MobileCta />}
     </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { site } from "@/lib/site";
@@ -12,6 +13,7 @@ const fieldClass =
   "h-11 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus-visible:border-[#d4b56a] focus-visible:ring-2 focus-visible:ring-[#d4b56a]/40";
 
 export function BookingForm() {
+  const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const minDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
@@ -34,11 +36,8 @@ export function BookingForm() {
         return;
       }
 
-      setStatus("success");
-      setMessage(
-        "Aanvraag ontvangen. We reageren binnen 24 uur met beschikbaarheid en een voorstel.",
-      );
       form.reset();
+      router.push("/bedankt");
     } catch {
       setStatus("error");
       setMessage(
