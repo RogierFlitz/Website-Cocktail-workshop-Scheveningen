@@ -46,14 +46,14 @@ function Hero() {
       className="relative isolate overflow-hidden bg-[#0c1624] text-[#f3e6c8]"
     >
       <Image
-        src="/images/cocktail-shaker.jpg"
-        alt="Cocktail workshop Scheveningen: bartender shaket een cocktail in een stalen shaker"
+        src="/images/workshop-strand-groep.jpg"
+        alt="Groep shaken cocktails aan een lange tafel op het strand van Scheveningen, met pier en reuzenrad"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center opacity-45"
+        className="object-cover object-[center_35%] opacity-70"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0c1624]/40 via-[#0c1624]/55 to-[#0c1624]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0c1624]/35 via-[#0c1624]/50 to-[#0c1624]" />
       <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <Badge className="w-fit bg-[#d4b56a] text-[#0c1624] hover:bg-[#d4b56a]">
           Bij strandtenten en restaurants · Scheveningen
@@ -152,8 +152,8 @@ function Workshop() {
         </div>
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
           <Image
-            src="/images/mojito.jpg"
-            alt="Zelfgemaakte mojito tijdens de cocktail workshop in Scheveningen"
+            src="/images/workshop-schenken.jpg"
+            alt="Deelnemer schenkt een zelfgemaakte cocktail uit de shaker tijdens de workshop"
             fill
             sizes="(max-width: 1024px) 100vw, 40vw"
             className="object-cover"
@@ -215,8 +215,8 @@ function Programma() {
         <div className="mt-12 grid gap-4 sm:grid-cols-3">
           <figure className="relative aspect-[4/3] overflow-hidden rounded-xl">
             <Image
-              src="/images/bartender.jpg"
-              alt="Bartender legt cocktailtechnieken uit tijdens de workshop in Scheveningen"
+              src="/images/workshop-mixen.jpg"
+              alt="Deelnemers meten en mixen cocktails aan een bartafel tijdens de workshop"
               fill
               sizes="(max-width: 640px) 100vw, 33vw"
               className="object-cover"
@@ -224,8 +224,8 @@ function Programma() {
           </figure>
           <figure className="relative aspect-[4/3] overflow-hidden rounded-xl">
             <Image
-              src="/images/cocktails-bar.jpg"
-              alt="Cocktails op de bar na afloop van de cocktailworkshop Scheveningen"
+              src="/images/workshop-team.jpg"
+              alt="Team zit samen aan de bartafel tijdens een cocktailworkshop als bedrijfsuitje"
               fill
               sizes="(max-width: 640px) 100vw, 33vw"
               className="object-cover"
@@ -233,8 +233,8 @@ function Programma() {
           </figure>
           <figure className="relative aspect-[4/3] overflow-hidden rounded-xl">
             <Image
-              src="/images/citrus-cocktail.jpg"
-              alt="Citruscocktail met verse ingrediënten, gemaakt tijdens de workshop"
+              src="/images/workshop-toast.jpg"
+              alt="Vrienden toasten met zelfgemaakte mojito’s na de cocktail workshop"
               fill
               sizes="(max-width: 640px) 100vw, 33vw"
               className="object-cover"
@@ -448,15 +448,26 @@ function Locatie() {
             bij jullie groep past. Parkeren en ov hangen af van die locatie.
           </p>
         </div>
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#081018]">
-          <iframe
-            title="Kaart: kantoor Cocktail Workshop Scheveningen, Schokkerweg 38"
-            src={site.mapsEmbed}
-            className="aspect-[16/11] w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+        <div className="space-y-4">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <Image
+              src="/images/workshop-strand-tafel.jpg"
+              alt="Deelnemers shaken cocktails aan een lange tafel op het strand van Scheveningen"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#081018]">
+            <iframe
+              title="Kaart: kantoor Cocktail Workshop Scheveningen, Schokkerweg 38"
+              src={site.mapsEmbed}
+              className="aspect-[16/11] w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     </section>

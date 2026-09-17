@@ -3,7 +3,7 @@ import { reviews } from "@/lib/reviews";
 
 export function jsonLdGraph() {
   const logoUrl = `${site.url}${site.logoPath}`;
-  const imageUrl = `${site.url}/images/cocktail-shaker.jpg`;
+  const imageUrl = `${site.url}/images/workshop-strand-groep.jpg`;
   const postalAddress = {
     "@type": "PostalAddress",
     name: "Kantoor",

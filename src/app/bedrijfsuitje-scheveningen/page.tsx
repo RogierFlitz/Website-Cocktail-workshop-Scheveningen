@@ -56,8 +56,8 @@ export default function Page() {
       eyebrow="Bedrijfsuitje en teamuitje"
       title="Bedrijfsuitje Scheveningen: cocktail workshop voor teams"
       lead="Twee uur bartender workshop als bedrijfsuitje. Geschikt voor teams vanaf vijf personen, indoor of bij een strandtent. Factuur inclusief btw."
-      imageSrc="/images/bartender.jpg"
-      imageAlt="Bartender begeleidt een team tijdens een bedrijfsuitje cocktail workshop in Scheveningen"
+      imageSrc="/images/workshop-strand-groep.jpg"
+      imageAlt="Bedrijfsuitje cocktail workshop op het strand van Scheveningen, groep shaken samen"
       sections={[
         {
           heading: "Een teamuitje met een duidelijke taak",

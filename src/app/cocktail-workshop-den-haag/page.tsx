@@ -56,8 +56,8 @@ export default function Page() {
       eyebrow="Den Haag en omstreken"
       title="Cocktail workshop in Den Haag"
       lead="Zelfde bartender, zelfde twee uur, dezelfde drie drankjes. Alleen de locatie is de stad: jullie kantoor, een restaurant of een andere indoor plek."
-      imageSrc="/images/cocktails-bar.jpg"
-      imageAlt="Cocktailbar klaar voor een cocktail workshop in Den Haag"
+      imageSrc="/images/workshop-mixen.jpg"
+      imageAlt="Deelnemers mixen cocktails aan tafel tijdens een indoor cocktail workshop"
       sections={[
         {
           heading: "Waarom een cocktail workshop in de stad",

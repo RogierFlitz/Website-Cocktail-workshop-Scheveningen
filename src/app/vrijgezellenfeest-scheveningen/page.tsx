@@ -56,8 +56,8 @@ export default function Page() {
       eyebrow="Vrijgezellenfeest"
       title="Vrijgezellenfeest in Scheveningen met cocktail workshop"
       lead="Twee uur zelf shaken aan zee. Geen dwangmatige opdrachten, wel drie cocktails of mocktails per persoon. Daarna de boulevard of het strand."
-      imageSrc="/images/mojito.jpg"
-      imageAlt="Mojito gemaakt tijdens een vrijgezellenfeest cocktail workshop in Scheveningen"
+      imageSrc="/images/workshop-pornstar.jpg"
+      imageAlt="Zelfgemaakte pornstar martini’s op het strand tijdens een vrijgezellenfeest in Scheveningen"
       sections={[
         {
           heading: "Een vrijgezellenfeest waar iedereen meedoet",
