@@ -84,14 +84,9 @@ export function jsonLdGraph() {
           "@type": "ImageObject",
           url: imageUrl,
         },
-        potentialAction: {
-          "@type": "ReserveAction",
-          name: "Vraag beschikbaarheid aan",
-          target: `${site.url}/#boeken`,
-        },
       },
       {
-        "@type": ["ProfessionalService", "LocalBusiness"],
+        "@type": "ProfessionalService",
         "@id": `${site.url}/#business`,
         name: site.legalName,
         url: site.url,
@@ -196,46 +191,6 @@ export function jsonLdGraph() {
             text: faq.answer,
           },
         })),
-      },
-      {
-        "@type": "HowTo",
-        "@id": `${site.url}/#howto`,
-        name: "Hoe verloopt een cocktail workshop in Scheveningen",
-        description:
-          "Twee uur bartender workshop bij een strandtent of restaurant: ontvangst, korte introductie, daarna zelf drie cocktails of mocktails shaken.",
-        totalTime: "PT2H",
-        estimatedCost: {
-          "@type": "MonetaryAmount",
-          currency: "EUR",
-          value: "30",
-        },
-        supply: [
-          { "@type": "HowToSupply", name: "Verse ingrediënten en ijs" },
-          { "@type": "HowToSupply", name: "Shakers, glaswerk en garnituur" },
-        ],
-        tool: [{ "@type": "HowToTool", name: "Cocktailshaker" }],
-        step: [
-          {
-            "@type": "HowToStep",
-            name: "Ontvangst",
-            text: "Jullie komen aan op de afgesproken strandtent, het restaurant of jullie eigen locatie.",
-          },
-          {
-            "@type": "HowToStep",
-            name: "Introductie",
-            text: "De bartender legt shaken, stirren en de opbouw van klassiekers uit. Geen powerpoint.",
-          },
-          {
-            "@type": "HowToStep",
-            name: "Zelf shaken",
-            text: "Iedereen maakt drie cocktails of mocktails. Grotere groepen werken aan meerdere barstations.",
-          },
-          {
-            "@type": "HowToStep",
-            name: "Afronden",
-            text: "Klaar na twee uur, of optioneel door met borrel, diner, BBQ of een extra activiteit.",
-          },
-        ],
       },
     ],
   };

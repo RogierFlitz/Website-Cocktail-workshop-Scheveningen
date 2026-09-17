@@ -54,10 +54,6 @@ export const site = {
     "Wassenaar",
   ],
   countryServed: "NL",
-  geo: {
-    latitude: 52.100477,
-    longitude: 4.271454,
-  },
   logoPath: "/images/logo.png",
 } as const;
 

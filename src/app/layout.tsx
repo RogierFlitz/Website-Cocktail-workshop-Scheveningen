@@ -41,11 +41,20 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.title,
     description: site.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Cocktail Workshop Scheveningen — 2 uur, 3 cocktails, vanaf 5 personen",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
+    images: ["/opengraph-image"],
   },
   formatDetection: {
     telephone: true,

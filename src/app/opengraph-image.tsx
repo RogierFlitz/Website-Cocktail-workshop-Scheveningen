@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Cocktail Workshop Scheveningen — leer shaken aan zee";
+export const alt =
+  "Cocktail Workshop Scheveningen — 2 uur, 3 cocktails, vanaf 5 personen";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
