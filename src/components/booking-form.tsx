@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { site } from "@/lib/site";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+const fieldClass =
+  "h-11 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus-visible:border-[#d4b56a] focus-visible:ring-2 focus-visible:ring-[#d4b56a]/40";
+
 export function BookingForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const minDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,7 +43,7 @@ export function BookingForm() {
     } catch {
       setStatus("error");
       setMessage(
-        "Versturen lukte niet. Mail ons op info@cocktailworkshopscheveningen.nl of probeer het opnieuw.",
+        `Versturen lukte niet. Mail ons op ${site.bookingEmail} of probeer het opnieuw.`,
       );
     }
   }
@@ -49,11 +54,10 @@ export function BookingForm() {
       action="/api/boeking"
       onSubmit={onSubmit}
       className="grid gap-4"
-      noValidate
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <Field id="naam" label="Naam" required>
-          <Input id="naam" name="naam" autoComplete="name" required />
+          <Input id="naam" name="naam" autoComplete="name" required className={fieldClass} />
         </Field>
         <Field id="email" label="E-mail" required>
           <Input
@@ -62,13 +66,21 @@ export function BookingForm() {
             type="email"
             autoComplete="email"
             required
+            className={fieldClass}
           />
         </Field>
         <Field id="telefoon" label="Telefoon">
-          <Input id="telefoon" name="telefoon" type="tel" autoComplete="tel" />
+          <Input
+            id="telefoon"
+            name="telefoon"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            className={fieldClass}
+          />
         </Field>
         <Field id="datum" label="Gewenste datum">
-          <Input id="datum" name="datum" type="date" />
+          <Input id="datum" name="datum" type="date" min={minDate} className={fieldClass} />
         </Field>
         <Field id="personen" label="Aantal personen" required>
           <Input
@@ -77,14 +89,15 @@ export function BookingForm() {
             type="number"
             min={5}
             required
-            placeholder="Minimaal 5"
+            defaultValue={10}
+            className={fieldClass}
           />
         </Field>
         <Field id="type" label="Soort groep">
           <select
             id="type"
             name="type"
-            className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className={fieldClass}
             defaultValue="vrienden"
           >
             <option value="vrienden">Vrienden / familie</option>
@@ -99,16 +112,20 @@ export function BookingForm() {
           id="bericht"
           name="bericht"
           rows={4}
-          placeholder="Bijvoorbeeld: mojito, pornstar martini, mocktails, aansluitend diner"
+          placeholder="Bijvoorbeeld: mojito, mocktails, aansluitend diner"
+          className="min-h-24 rounded-md border border-input bg-white px-3 py-2 text-sm outline-none focus-visible:border-[#d4b56a] focus-visible:ring-2 focus-visible:ring-[#d4b56a]/40"
         />
       </Field>
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex h-11 items-center justify-center rounded-lg bg-[#0c1624] px-4 text-sm font-medium text-[#f3e6c8] hover:bg-[#16263b] disabled:opacity-50"
+        className="inline-flex h-12 items-center justify-center rounded-lg bg-[#0c1624] px-4 text-sm font-medium text-[#f3e6c8] hover:bg-[#16263b] disabled:opacity-50"
       >
         {status === "sending" ? "Versturen…" : "Vraag beschikbaarheid aan"}
       </button>
+      <p className="text-xs text-[#3d3a33]">
+        Geen verplichting. We sturen eerst een voorstel met locatie en prijs.
+      </p>
       {message ? (
         <p
           role="status"

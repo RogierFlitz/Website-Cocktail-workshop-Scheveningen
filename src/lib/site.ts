@@ -3,6 +3,7 @@ export const site = {
   legalName: "Cocktail Workshop Scheveningen",
   url: "https://cocktailworkshopscheveningen.nl",
   email: "info@cocktailworkshopscheveningen.nl",
+  bookingEmail: "info@flitz-events.nl",
   phone: "070 223 0008",
   phoneInternational: "+31 70 223 0008",
   phoneHref: "tel:+31702230008",
@@ -82,10 +83,10 @@ export function googleSameAs() {
 }
 
 export const prices = [
-  { label: "Vanaf 5 personen", price: "€ 37,50", per: "p.p." },
-  { label: "Vanaf 10 personen", price: "€ 35,00", per: "p.p." },
-  { label: "Vanaf 25 personen", price: "€ 32,50", per: "p.p." },
-  { label: "Vanaf 50 personen", price: "€ 30,00", per: "p.p." },
+  { label: "Vanaf 5 personen", price: "€ 37,50", per: "p.p.", featured: false },
+  { label: "Vanaf 10 personen", price: "€ 35,00", per: "p.p.", featured: true },
+  { label: "Vanaf 25 personen", price: "€ 32,50", per: "p.p.", featured: false },
+  { label: "Vanaf 50 personen", price: "€ 30,00", per: "p.p.", featured: false },
 ] as const;
 
 export const extras = [

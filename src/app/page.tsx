@@ -3,6 +3,7 @@ import { BookingForm } from "@/components/booking-form";
 import { Footer } from "@/components/footer";
 import { GoogleLokaal } from "@/components/google-lokaal";
 import { Header } from "@/components/header";
+import { MobileCta } from "@/components/mobile-cta";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -19,25 +20,7 @@ export default function Home() {
         Ga naar inhoud
       </a>
       <Header />
-      <nav
-        aria-label="Broodkruimel"
-        className="border-b border-[#e4d8be] bg-[#f7f1e6] px-4 py-2 text-xs text-[#3d3a33] sm:px-6"
-      >
-        <ol className="mx-auto flex max-w-6xl gap-2">
-          <li>
-            <a href="#top" className="hover:underline">
-              Home
-            </a>
-          </li>
-          <li aria-hidden>/</li>
-          <li>
-            <a href="#workshop" className="hover:underline">
-              Cocktail workshop Scheveningen
-            </a>
-          </li>
-        </ol>
-      </nav>
-      <main>
+      <main className="pb-24 xl:pb-0">
         <Hero />
         <Workshop />
         <Programma />
@@ -50,6 +33,7 @@ export default function Home() {
         <Privacy />
       </main>
       <Footer />
+      <MobileCta />
     </>
   );
 }
@@ -58,7 +42,7 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[88vh] overflow-hidden bg-[#0c1624] text-[#f3e6c8]"
+      className="relative isolate overflow-hidden bg-[#0c1624] text-[#f3e6c8]"
     >
       <Image
         src="/images/cocktail-shaker.jpg"
@@ -69,39 +53,39 @@ function Hero() {
         className="object-cover object-center opacity-45"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0c1624]/40 via-[#0c1624]/55 to-[#0c1624]" />
-      <div className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-24">
+      <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <Badge className="w-fit bg-[#d4b56a] text-[#0c1624] hover:bg-[#d4b56a]">
           Bij strandtenten en restaurants · Scheveningen
         </Badge>
-        <h1 className="mt-5 max-w-3xl font-heading text-4xl leading-[1.05] sm:text-6xl lg:text-7xl">
+        <h1 className="mt-4 max-w-3xl font-heading text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
           Cocktail workshop Scheveningen
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#e8dfd0]/90 sm:text-xl">
-          Alleen wij zetten de bartenderworkshop neer bij strandtenten en
-          restaurants in Scheveningen. Twee uur, drie cocktails per persoon,
-          vanaf € 30. Kantoor: Schokkerweg 38.
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#e8dfd0]/90 sm:text-lg">
+          Zelf shaken aan zee. Twee uur, drie cocktails per persoon, vanaf € 30.
+          Wij zetten de bar neer bij een strandtent of restaurant — jullie
+          kiezen de datum.
         </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
             href="#boeken"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-[#d4b56a] text-[#0c1624] hover:bg-[#e4c77a]",
+              "h-11 bg-[#d4b56a] px-5 text-[#0c1624] hover:bg-[#e4c77a]",
             )}
           >
-            Beschikbaarheid checken
+            Check beschikbaarheid
           </a>
           <a
             href="#prijzen"
             className={cn(
               buttonVariants({ size: "lg", variant: "outline" }),
-              "border-[#f3e6c8]/40 bg-transparent text-[#f3e6c8] hover:bg-white/10 hover:text-white",
+              "h-11 border-[#f3e6c8]/40 bg-transparent px-5 text-[#f3e6c8] hover:bg-white/10 hover:text-white",
             )}
           >
             Bekijk prijzen
           </a>
         </div>
-        <dl className="mt-12 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-6 text-sm">
+        <dl className="mt-8 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-5 text-sm">
           <div>
             <dt className="text-[#e8dfd0]/60">Duur</dt>
             <dd className="mt-1 font-medium">2 uur</dd>
@@ -290,14 +274,23 @@ function VoorWie() {
         </p>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {audiences.map((item) => (
-            <Card key={item.title} className="border-[#e4d8be] bg-white shadow-none">
+            <Card
+              key={item.title}
+              className="border-[#e4d8be] bg-white shadow-none transition hover:border-[#d4b56a]"
+            >
               <CardHeader>
                 <h3 className="font-heading text-2xl font-medium leading-snug text-[#0c1624]">
                   {item.title}
                 </h3>
               </CardHeader>
-              <CardContent className="text-sm leading-6 text-[#3d3a33]">
-                {item.text}
+              <CardContent className="space-y-4 text-sm leading-6 text-[#3d3a33]">
+                <p>{item.text}</p>
+                <a
+                  href="#boeken"
+                  className="inline-flex text-sm font-medium text-[#8a6d2f] underline-offset-4 hover:underline"
+                >
+                  Vraag een datum aan
+                </a>
               </CardContent>
             </Card>
           ))}
@@ -323,8 +316,21 @@ function Prijzen() {
         </p>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {prices.map((tier) => (
-            <Card key={tier.label} className="border-[#d4b56a]/40 bg-[#0c1624] text-[#f3e6c8]">
+            <Card
+              key={tier.label}
+              className={cn(
+                "border bg-[#0c1624] text-[#f3e6c8]",
+                tier.featured
+                  ? "border-[#d4b56a] ring-1 ring-[#d4b56a]/50"
+                  : "border-[#d4b56a]/40",
+              )}
+            >
               <CardHeader>
+                {tier.featured ? (
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#d4b56a]">
+                    Meest gekozen
+                  </p>
+                ) : null}
                 <p className="text-sm text-[#d4b56a]">{tier.label}</p>
                 <CardTitle className="font-heading text-4xl">
                   {tier.price}
@@ -333,8 +339,14 @@ function Prijzen() {
                   </span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-[#e8dfd0]/75">
-                2 uur · 3 drankjes · op locatie
+              <CardContent className="space-y-4 text-sm text-[#e8dfd0]/75">
+                <p>2 uur · 3 drankjes · op locatie</p>
+                <a
+                  href="#boeken"
+                  className="inline-flex font-medium text-[#d4b56a] underline-offset-4 hover:underline"
+                >
+                  Deze groep boeken
+                </a>
               </CardContent>
             </Card>
           ))}
@@ -419,21 +431,21 @@ function Faq() {
         <h2 className="font-heading text-4xl text-[#0c1624] sm:text-5xl">
           Veelgestelde vragen over de cocktail workshop Scheveningen
         </h2>
-        <div className="mt-10 divide-y divide-[#e4d8be] border-y border-[#e4d8be]">
+        <div className="mt-10 divide-y divide-[#e4d8be] overflow-hidden rounded-2xl border border-[#e4d8be] bg-white">
           {faqs.map((faq) => (
-            <details key={faq.question} className="group py-3">
-              <summary className="cursor-pointer list-none text-left text-sm font-medium text-[#0c1624] marker:content-none [&::-webkit-details-marker]:hidden">
+            <details key={faq.question} className="group px-4 sm:px-5">
+              <summary className="cursor-pointer list-none py-4 text-left text-sm font-medium text-[#0c1624] marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a] [&::-webkit-details-marker]:hidden">
                 <span className="flex items-start justify-between gap-4">
                   {faq.question}
-                  <span aria-hidden className="text-[#8a6d2f] group-open:hidden">
+                  <span aria-hidden className="mt-0.5 text-[#8a6d2f] group-open:hidden">
                     +
                   </span>
-                  <span aria-hidden className="hidden text-[#8a6d2f] group-open:inline">
+                  <span aria-hidden className="mt-0.5 hidden text-[#8a6d2f] group-open:inline">
                     −
                   </span>
                 </span>
               </summary>
-              <p className="pt-2 text-sm leading-7 text-[#3d3a33]">{faq.answer}</p>
+              <p className="pb-4 text-sm leading-7 text-[#3d3a33]">{faq.answer}</p>
             </details>
           ))}
         </div>
@@ -451,22 +463,27 @@ function Boeken() {
             Boek je cocktail workshop in Scheveningen
           </h2>
           <p className="mt-4 text-base leading-7 text-[#3d3a33]">
-            Vul het formulier in of bel{" "}
-            <a className="underline underline-offset-4" href={site.phoneHref}>
-              {site.phone}
-            </a>
-            . We reageren binnen 24 uur met beschikbaarheid, prijs en welke
-            strandtent of welk restaurant past. Kantoor:{" "}
-            {formattedAddress}. Mailen kan naar{" "}
-            <a className="underline underline-offset-4" href={`mailto:${site.email}`}>
-              {site.email}
-            </a>
-            .
+            Vul het formulier in. We reageren binnen 24 uur met beschikbaarheid,
+            prijs en welke strandtent of welk restaurant past.
           </p>
+          <div className="mt-6 space-y-2 text-sm text-[#3d3a33]">
+            <p>
+              Liever bellen?{" "}
+              <a className="font-medium underline underline-offset-4" href={site.phoneHref}>
+                {site.phone}
+              </a>
+            </p>
+            <p>
+              Mail:{" "}
+              <a className="underline underline-offset-4" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
+            </p>
+          </div>
         </div>
         <Card className="border-[#e4d8be] bg-white shadow-none">
           <CardHeader>
-            <CardTitle>Aanvraag</CardTitle>
+            <CardTitle>Aanvraag — antwoord binnen 24 uur</CardTitle>
           </CardHeader>
           <CardContent>
             <BookingForm />

@@ -40,7 +40,7 @@ export function Footer() {
             </li>
             <li>
               <a className="hover:text-white" href="#google">
-                Google en reviews
+                Reviews
               </a>
             </li>
             <li>
