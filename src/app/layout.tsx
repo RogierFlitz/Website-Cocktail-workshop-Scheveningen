@@ -41,7 +41,6 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.title,
     description: site.description,
-    modifiedTime: site.contentUpdated,
   },
   twitter: {
     card: "summary_large_image",

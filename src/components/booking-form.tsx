@@ -25,14 +25,13 @@ export function BookingForm() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const response = await fetch("/api/boeking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error("Boeking mislukt");
+      const sent = await sendBooking(data);
+      if (sent === "activate") {
+        setStatus("error");
+        setMessage(
+          `Eerste keer: FormSubmit heeft een activatiemail gestuurd naar ${site.bookingEmail}. Open die mail, klik op de link, en verstuur dit formulier daarna opnieuw.`,
+        );
+        return;
       }
 
       setStatus("success");
@@ -141,6 +140,54 @@ export function BookingForm() {
       ) : null}
     </form>
   );
+}
+
+async function sendBooking(data: Record<string, FormDataEntryValue>) {
+  const payload = {
+    naam: String(data.naam ?? "").trim(),
+    email: String(data.email ?? "").trim(),
+    telefoon: String(data.telefoon ?? "").trim(),
+    datum: String(data.datum ?? "").trim(),
+    personen: String(data.personen ?? "").trim(),
+    type: String(data.type ?? "").trim(),
+    bericht: String(data.bericht ?? "").trim(),
+  };
+
+  const apiResponse = await fetch("/api/boeking", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (apiResponse.ok) return "ok";
+
+  const formResponse = await fetch(
+    `https://formsubmit.co/ajax/${encodeURIComponent(site.bookingEmail)}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        ...payload,
+        _subject: `Boekingsaanvraag cocktail workshop: ${payload.naam}`,
+        _replyto: payload.email,
+        _template: "table",
+        _captcha: "false",
+      }),
+    },
+  );
+  const result = (await formResponse.json().catch(() => ({}))) as {
+    success?: boolean | string;
+    message?: string;
+  };
+  const ok = result.success === true || result.success === "true";
+  if (ok) return "ok";
+
+  const message = String(result.message ?? "");
+  if (/activat|confirm/i.test(message)) return "activate";
+  if (formResponse.ok && !message) return "activate";
+  throw new Error(message || "FormSubmit failed");
 }
 
 function Field({

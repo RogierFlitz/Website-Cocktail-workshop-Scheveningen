@@ -37,7 +37,6 @@ export async function POST(request: Request) {
       replyTo: email,
       subject,
       text,
-      fields: { naam, email, telefoon, datum, personen, type, bericht },
     });
   } catch (error) {
     console.error("[boeking] mail failed", error);
@@ -55,55 +54,35 @@ async function sendBookingMail({
   replyTo,
   subject,
   text,
-  fields,
 }: {
   to: string;
   replyTo: string;
   subject: string;
   text: string;
-  fields: Record<string, string | number>;
 }) {
   const resendKey = process.env.RESEND_API_KEY;
-  if (resendKey) {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from:
-          process.env.RESEND_FROM ??
-          "Cocktail Workshop Scheveningen <onboarding@resend.dev>",
-        to: [to],
-        reply_to: replyTo,
-        subject,
-        text,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Resend ${response.status}: ${await response.text()}`);
-    }
-    return;
+  if (!resendKey) {
+    throw new Error("RESEND_API_KEY ontbreekt");
   }
 
-  const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${resendKey}`,
       "Content-Type": "application/json",
-      Accept: "application/json",
     },
     body: JSON.stringify({
-      ...fields,
-      _subject: subject,
-      _replyto: replyTo,
-      _template: "table",
-      _captcha: "false",
+      from:
+        process.env.RESEND_FROM ??
+        "Cocktail Workshop Scheveningen <onboarding@resend.dev>",
+      to: [to],
+      reply_to: replyTo,
+      subject,
+      text,
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`FormSubmit ${response.status}: ${await response.text()}`);
+    throw new Error(`Resend ${response.status}: ${await response.text()}`);
   }
 }
