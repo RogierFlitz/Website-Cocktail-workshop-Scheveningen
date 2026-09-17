@@ -142,6 +142,18 @@ export function BookingForm() {
   );
 }
 
+async function fetchJson(
+  input: RequestInfo,
+  init: RequestInit,
+  timeoutMs: number,
+) {
+  const response = await fetch(input, {
+    ...init,
+    signal: AbortSignal.timeout(timeoutMs),
+  });
+  return response;
+}
+
 async function sendBooking(data: Record<string, FormDataEntryValue>) {
   const payload = {
     naam: String(data.naam ?? "").trim(),
@@ -153,14 +165,18 @@ async function sendBooking(data: Record<string, FormDataEntryValue>) {
     bericht: String(data.bericht ?? "").trim(),
   };
 
-  const apiResponse = await fetch("/api/boeking", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  const apiResponse = await fetchJson(
+    "/api/boeking",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    },
+    12000,
+  );
   if (apiResponse.ok) return "ok";
 
-  const formResponse = await fetch(
+  const formResponse = await fetchJson(
     `https://formsubmit.co/ajax/${encodeURIComponent(site.bookingEmail)}`,
     {
       method: "POST",
@@ -176,6 +192,7 @@ async function sendBooking(data: Record<string, FormDataEntryValue>) {
         _captcha: "false",
       }),
     },
+    10000,
   );
   const result = (await formResponse.json().catch(() => ({}))) as {
     success?: boolean | string;

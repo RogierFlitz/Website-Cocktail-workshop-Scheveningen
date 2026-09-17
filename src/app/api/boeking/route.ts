@@ -65,24 +65,66 @@ async function sendBookingMail({
     throw new Error("RESEND_API_KEY ontbreekt");
   }
 
+  const preferredFrom =
+    process.env.RESEND_FROM ??
+    `Cocktail Workshop Scheveningen <info@${process.env.RESEND_EMAIL_DOMAIN ?? "cocktailworkshopscheveningen.nl"}>`;
+  const fallbackFrom =
+    "Cocktail Workshop Scheveningen <onboarding@resend.dev>";
+
+  const firstError = await tryResend({
+    apiKey: resendKey,
+    from: preferredFrom,
+    to,
+    replyTo,
+    subject,
+    text,
+  });
+  if (!firstError) return;
+
+  const secondError = await tryResend({
+    apiKey: resendKey,
+    from: fallbackFrom,
+    to,
+    replyTo,
+    subject,
+    text,
+  });
+  if (!secondError) return;
+
+  throw new Error(secondError);
+}
+
+async function tryResend({
+  apiKey,
+  from,
+  to,
+  replyTo,
+  subject,
+  text,
+}: {
+  apiKey: string;
+  from: string;
+  to: string;
+  replyTo: string;
+  subject: string;
+  text: string;
+}) {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${resendKey}`,
+      Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from:
-        process.env.RESEND_FROM ??
-        `Cocktail Workshop Scheveningen <info@${process.env.RESEND_EMAIL_DOMAIN ?? "cocktailworkshopscheveningen.nl"}>`,
+      from,
       to: [to],
       reply_to: replyTo,
       subject,
       text,
     }),
+    signal: AbortSignal.timeout(8000),
   });
 
-  if (!response.ok) {
-    throw new Error(`Resend ${response.status}: ${await response.text()}`);
-  }
+  if (response.ok) return null;
+  return `Resend ${response.status}: ${await response.text()}`;
 }
