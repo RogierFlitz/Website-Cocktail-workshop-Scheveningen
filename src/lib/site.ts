@@ -71,15 +71,44 @@ export const napLines = [
   site.url,
 ] as const;
 
+export function googlePlaceId() {
+  return site.google.placeId.trim();
+}
+
+export function googleMapsPlaceUrl() {
+  const placeId = googlePlaceId();
+  if (placeId) {
+    return `https://www.google.com/maps/place/?q=place_id:${placeId}`;
+  }
+  return site.mapsUrl;
+}
+
+export function googleMapsEmbedUrl() {
+  const placeId = googlePlaceId();
+  if (placeId) {
+    return `https://maps.google.com/maps?q=place_id:${placeId}&hl=nl&z=16&output=embed`;
+  }
+  return site.mapsEmbed;
+}
+
+export function googleBusinessHref() {
+  const custom = process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL?.trim();
+  if (custom) {
+    return custom;
+  }
+  return googleMapsPlaceUrl();
+}
+
 export function googleReviewUrl() {
-  if (site.google.placeId) {
-    return `https://search.google.com/local/writereview?placeid=${site.google.placeId}`;
+  const placeId = googlePlaceId();
+  if (placeId) {
+    return `https://search.google.com/local/writereview?placeid=${placeId}`;
   }
   return `https://www.google.com/search?q=${encodeURIComponent(`${site.name} ${formattedAddress}`)}`;
 }
 
 export function googleSameAs() {
-  return [...new Set([site.google.businessUrl, site.mapsUrl].filter(Boolean))];
+  return [...new Set([googleBusinessHref(), googleMapsPlaceUrl()].filter(Boolean))];
 }
 
 export const prices = [

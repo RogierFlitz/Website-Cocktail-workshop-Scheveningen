@@ -3,7 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { reviews } from "@/lib/reviews";
 import { cn } from "@/lib/utils";
-import { googleReviewUrl, site } from "@/lib/site";
+import { googleBusinessHref, googleReviewUrl } from "@/lib/site";
 
 export function GoogleLokaal() {
   const reviewHref = googleReviewUrl();
@@ -33,7 +33,7 @@ export function GoogleLokaal() {
                 kantoor. De workshoplocatie spreken we per boeking af.
               </p>
               <a
-                href={site.google.businessUrl}
+                href={googleBusinessHref()}
                 rel="noopener noreferrer"
                 target="_blank"
                 className={cn(

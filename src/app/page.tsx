@@ -8,7 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { extras, faqs, formattedAddress, prices, site } from "@/lib/site";
+import {
+  extras,
+  faqs,
+  formattedAddress,
+  googleMapsEmbedUrl,
+  prices,
+  site,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: {
@@ -461,7 +468,7 @@ function Locatie() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#081018]">
             <iframe
               title="Kaart: kantoor Cocktail Workshop Scheveningen, Schokkerweg 38"
-              src={site.mapsEmbed}
+              src={googleMapsEmbedUrl()}
               className="aspect-[16/11] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
