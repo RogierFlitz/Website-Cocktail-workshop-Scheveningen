@@ -46,7 +46,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Cocktail Workshop Scheveningen — 2 uur, 3 cocktails, vanaf 5 personen",
+        alt: `${site.name} — ${site.offerLine}`,
       },
     ],
   },

@@ -31,6 +31,7 @@ export const site = {
   locale: "nl_NL",
   language: "nl",
   contentUpdated: "2026-09-17",
+  offerLine: "2 uur · 3 cocktails · vanaf 5 personen",
   description:
     "Cocktail workshop Scheveningen bij strandtent of restaurant. 2 uur, 3 cocktails of mocktails, vanaf 5 personen, vanaf € 30 p.p. incl. btw. Bel 070 223 0008.",
   title:

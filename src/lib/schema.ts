@@ -79,11 +79,24 @@ export function jsonLdGraph() {
         about: { "@id": `${site.url}/#service` },
         description: site.description,
         inLanguage: "nl-NL",
+        datePublished: site.contentUpdated,
         dateModified: site.contentUpdated,
         primaryImageOfPage: {
           "@type": "ImageObject",
           url: imageUrl,
         },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${site.url}/#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: site.name,
+            item: `${site.url}/`,
+          },
+        ],
       },
       {
         "@type": "ProfessionalService",
@@ -143,7 +156,6 @@ export function jsonLdGraph() {
             }
           : {}),
         areaServed,
-        address: postalAddress,
         makesOffer: { "@id": `${site.url}/#service` },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -215,6 +227,7 @@ export function jsonLdLandingPage(page: {
         inLanguage: "nl-NL",
         isPartOf: { "@id": `${site.url}/#website` },
         about: { "@id": `${site.url}/#service` },
+        datePublished: site.contentUpdated,
         dateModified: site.contentUpdated,
       },
       {
