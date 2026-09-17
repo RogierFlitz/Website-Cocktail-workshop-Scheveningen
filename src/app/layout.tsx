@@ -66,13 +66,9 @@ export const metadata: Metadata = {
   },
   category: "entertainment",
   referrer: "strict-origin-when-cross-origin",
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? {
-        verification: {
-          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-        },
-      }
-    : {}),
+  verification: {
+    google: "8IM9tjY78VdYo3ovmnoTb3_fOPT-G1VhCoro4IomU8c",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
