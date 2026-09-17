@@ -1,10 +1,12 @@
 import { jsonLdGraph } from "@/lib/schema";
 
-export function JsonLd() {
+export function JsonLd({ data }: { data?: object }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph()) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data ?? jsonLdGraph()),
+      }}
     />
   );
 }

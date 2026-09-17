@@ -74,7 +74,7 @@ export function jsonLdGraph() {
         "@type": "WebPage",
         "@id": `${site.url}/#webpage`,
         url: `${site.url}/`,
-        name: "Cocktail Workshop Scheveningen | Boek jouw bartender workshop aan zee",
+        name: site.title,
         isPartOf: { "@id": `${site.url}/#website` },
         about: { "@id": `${site.url}/#service` },
         description: site.description,
@@ -83,6 +83,11 @@ export function jsonLdGraph() {
         primaryImageOfPage: {
           "@type": "ImageObject",
           url: imageUrl,
+        },
+        potentialAction: {
+          "@type": "ReserveAction",
+          name: "Vraag beschikbaarheid aan",
+          target: `${site.url}/#boeken`,
         },
       },
       {
@@ -184,6 +189,99 @@ export function jsonLdGraph() {
         "@type": "FAQPage",
         "@id": `${site.url}/#faq`,
         mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@type": "HowTo",
+        "@id": `${site.url}/#howto`,
+        name: "Hoe verloopt een cocktail workshop in Scheveningen",
+        description:
+          "Twee uur bartender workshop bij een strandtent of restaurant: ontvangst, korte introductie, daarna zelf drie cocktails of mocktails shaken.",
+        totalTime: "PT2H",
+        estimatedCost: {
+          "@type": "MonetaryAmount",
+          currency: "EUR",
+          value: "30",
+        },
+        supply: [
+          { "@type": "HowToSupply", name: "Verse ingrediënten en ijs" },
+          { "@type": "HowToSupply", name: "Shakers, glaswerk en garnituur" },
+        ],
+        tool: [{ "@type": "HowToTool", name: "Cocktailshaker" }],
+        step: [
+          {
+            "@type": "HowToStep",
+            name: "Ontvangst",
+            text: "Jullie komen aan op de afgesproken strandtent, het restaurant of jullie eigen locatie.",
+          },
+          {
+            "@type": "HowToStep",
+            name: "Introductie",
+            text: "De bartender legt shaken, stirren en de opbouw van klassiekers uit. Geen powerpoint.",
+          },
+          {
+            "@type": "HowToStep",
+            name: "Zelf shaken",
+            text: "Iedereen maakt drie cocktails of mocktails. Grotere groepen werken aan meerdere barstations.",
+          },
+          {
+            "@type": "HowToStep",
+            name: "Afronden",
+            text: "Klaar na twee uur, of optioneel door met borrel, diner, BBQ of een extra activiteit.",
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function jsonLdLandingPage(page: {
+  path: string;
+  name: string;
+  description: string;
+  faqs: readonly { question: string; answer: string }[];
+}) {
+  const url = `${site.url}${page.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: page.name,
+        description: page.description,
+        inLanguage: "nl-NL",
+        isPartOf: { "@id": `${site.url}/#website` },
+        about: { "@id": `${site.url}/#service` },
+        dateModified: site.contentUpdated,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: site.name,
+            item: `${site.url}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: page.name,
+            item: url,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: page.faqs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
           acceptedAnswer: {

@@ -30,7 +30,7 @@ export function MobileCta() {
           Bellen
         </a>
         <a
-          href="#boeken"
+          href="/#boeken"
           className="inline-flex h-12 flex-[1.4] items-center justify-center rounded-lg bg-[#d4b56a] text-sm font-medium text-[#0c1624]"
         >
           Beschikbaarheid checken

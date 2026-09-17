@@ -1,5 +1,6 @@
 import { Logo } from "@/components/logo";
 import { NapBlock } from "@/components/nap-block";
+import { landingPages } from "@/lib/pages";
 import { site } from "@/lib/site";
 
 export function Footer() {
@@ -29,22 +30,24 @@ export function Footer() {
           </p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a className="hover:text-white" href="#workshop">
-                Cocktail workshop
+              <a className="hover:text-white" href="/">
+                Cocktail workshop Scheveningen
+              </a>
+            </li>
+            {landingPages.map((page) => (
+              <li key={page.path}>
+                <a className="hover:text-white" href={page.path}>
+                  {page.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a className="hover:text-white" href="/#prijzen">
+                Prijzen
               </a>
             </li>
             <li>
-              <a className="hover:text-white" href="#locatie">
-                Locatie
-              </a>
-            </li>
-            <li>
-              <a className="hover:text-white" href="#google">
-                Reviews
-              </a>
-            </li>
-            <li>
-              <a className="hover:text-white" href="#privacy">
+              <a className="hover:text-white" href="/#privacy">
                 Privacy
               </a>
             </li>

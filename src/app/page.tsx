@@ -1,40 +1,41 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { BookingForm } from "@/components/booking-form";
-import { Footer } from "@/components/footer";
 import { GoogleLokaal } from "@/components/google-lokaal";
-import { Header } from "@/components/header";
-import { MobileCta } from "@/components/mobile-cta";
+import { JsonLd } from "@/components/json-ld";
+import { SiteShell } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { extras, faqs, formattedAddress, prices, site } from "@/lib/site";
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: {
+      "nl-NL": "/",
+      "x-default": "/",
+    },
+  },
+};
+
 export default function Home() {
   return (
-    <>
-      <a
-        href="#workshop"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-3 focus:py-2"
-      >
-        Ga naar inhoud
-      </a>
-      <Header />
-      <main className="pb-24 xl:pb-0">
-        <Hero />
-        <Workshop />
-        <Programma />
-        <VoorWie />
-        <Prijzen />
-        <Locatie />
-        <GoogleLokaal />
-        <Faq />
-        <Boeken />
-        <Privacy />
-      </main>
-      <Footer />
-      <MobileCta />
-    </>
+    <SiteShell>
+      <JsonLd />
+      <Hero />
+      <Workshop />
+      <Programma />
+      <VoorWie />
+      <DenHaagTeaser />
+      <Prijzen />
+      <Locatie />
+      <GoogleLokaal />
+      <Faq />
+      <Boeken />
+      <Privacy />
+    </SiteShell>
   );
 }
 
@@ -67,7 +68,7 @@ function Hero() {
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
-            href="#boeken"
+            href="/#boeken"
             className={cn(
               buttonVariants({ size: "lg" }),
               "h-11 bg-[#d4b56a] px-5 text-[#0c1624] hover:bg-[#e4c77a]",
@@ -76,7 +77,7 @@ function Hero() {
             Check beschikbaarheid
           </a>
           <a
-            href="#prijzen"
+            href="/#prijzen"
             className={cn(
               buttonVariants({ size: "lg", variant: "outline" }),
               "h-11 border-[#f3e6c8]/40 bg-transparent px-5 text-[#f3e6c8] hover:bg-white/10 hover:text-white",
@@ -250,14 +251,20 @@ function VoorWie() {
     {
       title: "Vrijgezellenfeest",
       text: "Een vrijgezellenfeest in Scheveningen zonder dwangmatige opdrachten. Iedereen doet mee, ook wie geen alcohol drinkt.",
+      href: "/vrijgezellenfeest-scheveningen",
+      linkLabel: "Vrijgezellenfeest aan zee",
     },
     {
       title: "Bedrijfsuitje of teamuitje",
       text: "Teams die elkaar alleen via Teams zien, staan opeens naast elkaar achter dezelfde bar. Dat werkt sneller dan een quiz.",
+      href: "/bedrijfsuitje-scheveningen",
+      linkLabel: "Bedrijfsuitje boeken",
     },
     {
       title: "Vrienden en familie",
       text: "Verjaardag, reünie of gewoon een zaterdag. De cocktail workshop is het startpunt, daarna de boulevard of het strand.",
+      href: "/#boeken",
+      linkLabel: "Vraag een datum aan",
     },
   ];
 
@@ -270,7 +277,8 @@ function VoorWie() {
         <p className="mt-4 max-w-2xl text-[#3d3a33]">
           We boeken geen losse toeristenplekjes. De cocktail workshop
           Scheveningen is gemaakt voor groepen die samen iets willen maken, niet
-          alleen toekijken.
+          alleen toekijken. Ook als mocktail workshop, of als cocktail workshop
+          in Den Haag als het strand niet past.
         </p>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {audiences.map((item) => (
@@ -286,15 +294,46 @@ function VoorWie() {
               <CardContent className="space-y-4 text-sm leading-6 text-[#3d3a33]">
                 <p>{item.text}</p>
                 <a
-                  href="#boeken"
+                  href={item.href}
                   className="inline-flex text-sm font-medium text-[#8a6d2f] underline-offset-4 hover:underline"
                 >
-                  Vraag een datum aan
+                  {item.linkLabel}
                 </a>
               </CardContent>
             </Card>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function DenHaagTeaser() {
+  return (
+    <section
+      id="den-haag"
+      className="border-y border-[#e4d8be] bg-white py-16 sm:py-20"
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-12">
+        <div>
+          <h2 className="font-heading text-3xl text-[#0c1624] sm:text-4xl">
+            Cocktail workshop in Den Haag, niet alleen aan zee
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[#3d3a33]">
+            Liever indoor, bij jullie kantoor of in de stad? Dan zetten we
+            dezelfde bartender workshop neer in Den Haag, Rijswijk, Wassenaar
+            of het Westland. Zelfde twee uur, dezelfde drie cocktails of
+            mocktails — andere locatie.
+          </p>
+        </div>
+        <p className="mt-6 lg:mt-0">
+          <a
+            href="/cocktail-workshop-den-haag"
+            className="inline-flex text-sm font-medium text-[#8a6d2f] underline-offset-4 hover:underline"
+          >
+            Cocktail workshop Den Haag
+          </a>
+        </p>
       </div>
     </section>
   );
@@ -342,7 +381,7 @@ function Prijzen() {
               <CardContent className="space-y-4 text-sm text-[#e8dfd0]/75">
                 <p>2 uur · 3 drankjes · op locatie</p>
                 <a
-                  href="#boeken"
+                  href="/#boeken"
                   className="inline-flex font-medium text-[#d4b56a] underline-offset-4 hover:underline"
                 >
                   Deze groep boeken
@@ -436,7 +475,7 @@ function Faq() {
             <details key={faq.question} className="group px-4 sm:px-5">
               <summary className="cursor-pointer list-none py-4 text-left text-sm font-medium text-[#0c1624] marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a] [&::-webkit-details-marker]:hidden">
                 <span className="flex items-start justify-between gap-4">
-                  {faq.question}
+                  <h3 className="font-medium">{faq.question}</h3>
                   <span aria-hidden className="mt-0.5 text-[#8a6d2f] group-open:hidden">
                     +
                   </span>

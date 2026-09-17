@@ -4,19 +4,19 @@ import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#workshop", label: "De workshop" },
-  { href: "#programma", label: "Programma" },
-  { href: "#prijzen", label: "Prijzen" },
-  { href: "#locatie", label: "Locatie" },
-  { href: "#google", label: "Reviews" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#workshop", label: "De workshop" },
+  { href: "/#programma", label: "Programma" },
+  { href: "/#prijzen", label: "Prijzen" },
+  { href: "/cocktail-workshop-den-haag", label: "Den Haag" },
+  { href: "/#locatie", label: "Locatie" },
+  { href: "/#faq", label: "FAQ" },
 ] as const;
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0c1624]/92 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:h-[4.25rem] sm:px-6">
-        <a href="#top" className="flex min-w-0 items-center gap-3 text-[#f3e6c8]">
+        <a href="/" className="flex min-w-0 items-center gap-3 text-[#f3e6c8]">
           <Logo size={44} priority />
           <span className="font-heading text-lg tracking-wide sm:text-xl">
             Cocktail Workshop
@@ -42,7 +42,7 @@ export function Header() {
             {site.phone}
           </a>
           <a
-            href="#boeken"
+            href="/#boeken"
             className={cn(
               buttonVariants({ size: "lg" }),
               "h-10 bg-[#d4b56a] px-4 text-[#0c1624] hover:bg-[#e4c77a]",
@@ -53,7 +53,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
           <a
-            href="#boeken"
+            href="/#boeken"
             className={cn(
               buttonVariants({ size: "lg" }),
               "h-10 bg-[#d4b56a] px-3 text-[#0c1624] hover:bg-[#e4c77a] sm:px-4",
