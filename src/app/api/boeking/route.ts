@@ -74,7 +74,7 @@ async function sendBookingMail({
     body: JSON.stringify({
       from:
         process.env.RESEND_FROM ??
-        "Cocktail Workshop Scheveningen <onboarding@resend.dev>",
+        `Cocktail Workshop Scheveningen <info@${process.env.RESEND_EMAIL_DOMAIN ?? "cocktailworkshopscheveningen.nl"}>`,
       to: [to],
       reply_to: replyTo,
       subject,

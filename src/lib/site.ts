@@ -2,7 +2,7 @@ export const site = {
   name: "Cocktail Workshop Scheveningen",
   legalName: "Cocktail Workshop Scheveningen",
   url: "https://cocktailworkshopscheveningen.nl",
-  email: "info@cocktailworkshopscheveningen.nl",
+  email: "info@flitz-events.nl",
   bookingEmail: "info@flitz-events.nl",
   phone: "070 223 0008",
   phoneInternational: "+31 70 223 0008",
